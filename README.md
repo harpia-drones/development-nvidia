@@ -23,9 +23,9 @@ Para acessar o terminal do container, utilize:
 
 ### 4. Configurações iniciais
 
-Ao entrar no container o diretório atual será /root/harpia_ws. Execute o script de inicialização que está dentro da pasta /src:
+Ao entrar no container o diretório atual será /root/harpia_ws. Execute o script de inicialização que está dentro da pasta src/:
 
-    bash /src/start.sh
+    bash ./src/start.sh
 
 Esse script faz as configurações iniciais. Valide as configurações com
 
