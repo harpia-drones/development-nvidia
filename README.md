@@ -35,11 +35,7 @@ Instale a PX4 rodando
 
     setup
 
-Após a esse passo, será solicitado que o container seja reiniciado. Para reiniciar o container, saia do container com ctrl + D ou rodando 
-    
-    exit 
-
-no terminal. Fora do container execute:
+Após a esse passo, será solicitado que o container seja reiniciado. Para reiniciar o container, saia do container com ctrl + D ou rodando "exit" no terminal. Fora do container execute:
 
     docker restart harpia
 
