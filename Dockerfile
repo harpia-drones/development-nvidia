@@ -10,7 +10,7 @@ SHELL ["/bin/bash", "-c"]
 
 RUN \
     # Create the workspace
-    mkdir -p /root/estudos_ws/src; \
+    mkdir -p /root/harpia_ws/src; \
     \
     # Update and upgrade the system
     apt-get update && apt-get upgrade -y && \
@@ -84,7 +84,7 @@ RUN \
     echo '  eval "$(register-python-argcomplete3 colcon)"' >> /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash && \
     echo 'elif type register-python-argcomplete > /dev/null 2>&1; then' >> /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash && \
     echo '  eval "$(register-python-argcomplete colcon)"' >> /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash && \
-    echo 'fi' >> /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash; \
+    echo 'fi' >> /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash && \
     \
     # Enable ROS 2 features (source ROS setup.bash)
     echo "source /opt/ros/jazzy/setup.bash" >> /root/.bashrc && \
@@ -99,30 +99,20 @@ RUN \
     apt update && apt install -y python3-colcon-common-extensions && \
     \
     # Build the workspace
-    cd /root/estudos_ws/ && colcon build; \
+    cd /root/harpia_ws/ && colcon build && \
     \
-    # Enable estudos_ws features (source custom workspace setup.bash)
-    echo "source /root/estudos_ws/install/setup.bash" >> /root/.bashrc; \
+    # Enable harpia_ws features (source custom workspace setup.bash)
+    echo "source /root/harpia_ws/install/setup.bash" >> /root/.bashrc && \
     \
     # Ensure the global bashrc file is updated with colcon configurations
-    echo "source /usr/share/colcon_cd/function/colcon_cd.sh" >> /root/.bashrc; \
-    echo "export _colcon_cd_root=/opt/ros/jazzy/" >> /root/.bashrc; \
-    echo "source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash" >> /root/.bashrc; \
+    echo "source /usr/share/colcon_cd/function/colcon_cd.sh" >> /root/.bashrc && \
+    echo "export _colcon_cd_root=/opt/ros/jazzy/" >> /root/.bashrc && \
+    echo "source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash" >> /root/.bashrc && \
     \
     # Create an alias to source the terminal
-    echo "" >> /root/.bashrc; \
-    \
-    # Modifying the colcon function to avoid it undestands fonders in dependency/ as packages 
-    echo "alias bashrc='source /root/.bashrc'" >> /root/.bashrc; \
-    echo "" >> /root/.bashrc; \
-    echo "colcon() {" >> /root/.bashrc; \
-    echo "    if [[ \"\$1\" == \"build\" ]]; then" >> /root/.bashrc; \
-    echo "        command colcon build --packages-ignore bringup description interfaces \"\${@:2}\"" >> /root/.bashrc; \
-    echo "    else" >> /root/.bashrc; \
-    echo "        command colcon \"\$@\"" >> /root/.bashrc; \
-    echo "    fi" >> /root/.bashrc; \
-    echo "}" >> /root/.bashrc; \
-    echo "" >> /root/.bashrc
+    echo " " >> /root/.bashrc && \
+    echo "# Alias to source the terminal" >> /root/.bashrc && \
+    echo "alias bashrc='source /root/.bashrc'" >> /root/.bashrc
 
-# Define the estudos_ws directory as the work directory
-WORKDIR /root/estudos_ws/
+# Define the harpia_ws directory as the work directory
+WORKDIR /root/harpia_ws/
