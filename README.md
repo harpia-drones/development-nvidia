@@ -7,7 +7,7 @@ Bem-vindo ao repositório de desenvolvimento da **Equipe Harpia**.
 ### 1. Clonar o repositório
 
     git clone git@github.com:harpia-drones/development.git
-    cd Estudos
+    cd development
 
 ### 2. Construir e iniciar o container
 
