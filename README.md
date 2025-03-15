@@ -13,7 +13,7 @@ Bem-vindo ao repositório de desenvolvimento da **Equipe Harpia**.
 
 Use o Docker Compose para construir e iniciar o ambiente:
 
-    docker-compose up -d
+    docker compose up -d
 
 ### 3. Acessar o container
 
