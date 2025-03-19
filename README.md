@@ -39,7 +39,7 @@ Após a esse passo, será solicitado que o container seja reiniciado. Para reini
 
     docker restart harpia
 
-Acesse o container novamente e rode o script de start.sh novamente. Após a conclusão dessa fase, a PX4-Autopilot e o Micro-XRCE-DDS estarão devidamente instalados. Verifique se a instalação foi bem sucedida executando:
+Acesse o container novamente e rode setup novamente. Após a conclusão dessa fase, a PX4-Autopilot e o Micro-XRCE-DDS estarão devidamente instalados. Verifique se a instalação foi bem sucedida executando:
 
     cd /root/PX4-Autopilot
     make px4_sitl gz_x500
@@ -52,6 +52,7 @@ Após a verificação, o próximo passo é instalar o QGroundControl:
 
     tmux
     su - harpia -s /bin/bash
+    source /home/harpia/.bashrc
     setup
 
 Isso iniciará a preparação para a instalação, e ao terminar será solicitado que o container seja reiniciado. Após o container ser reiniciado, acesse o container e rode os mesmo três últimos comandos. Ao final a instalação do QGroundControl será concluida, e o ambiente está pronto para ser usado. Reinicie o container, abra o tmux e divida o terminal em quatro janelas.  Na primeira janela, acesse a pasta da px4 e inicie o simulador
