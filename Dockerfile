@@ -112,7 +112,12 @@ RUN \
     # Create an alias to source the terminal
     echo " " >> /root/.bashrc && \
     echo "# Alias to source the terminal" >> /root/.bashrc && \
-    echo "alias bashrc='source /root/.bashrc'" >> /root/.bashrc
+    echo "alias bashrc='source /root/.bashrc'" >> /root/.bashrc && \
+    \
+    # Create an alias to start configuration
+    echo " " >> /root/.bashrc && \
+    echo "# Alias to start configuration" >> /root/.bashrc && \
+    echo "alias start='bash /root/harpia_ws/src/start.sh && source /root/.bashrc'" >> /root/.bashrc
 
 # Define the harpia_ws directory as the work directory
 WORKDIR /root/harpia_ws/

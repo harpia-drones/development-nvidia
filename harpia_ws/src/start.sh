@@ -25,6 +25,11 @@ if [ ! -f "$DEP_FLAG_FILE" ]; then
     apt-get update && \
     apt-get install -y ros-jazzy-joint-state-publisher-gui
 
+    # Create an alias to build ros2 workspace
+    echo " " >> /root/.bashrc
+    echo "# Alias to build ros2 workspace" >> /root/.bashrc
+    echo "alias cb='colcon build && source /root/.bashrc'" >> /root/.bashrc
+
     # Create config folder
     mkdir -p /root/config
 
@@ -43,7 +48,7 @@ if [ ! -f "$DEP_FLAG_FILE" ]; then
     cd "/root" && \
     git clone git@github.com:harpia-drones/dependencies.git && \
 
-    if [ $? -eq 1 ]; then
+    if [ $? -eq 0 ]; then
         echo ""
         echo "Error when cloning make dependencies folder."
         echo ">> Configuration aborted."

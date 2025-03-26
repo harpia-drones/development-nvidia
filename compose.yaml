@@ -14,8 +14,8 @@ services:
       - PATH=$PATH:/root/.local/bin:/usr/local/bin
     volumes:  
       - ./harpia_ws/src:/root/harpia_ws/src:rwx     #Links host and container files
-      - ~/.ssh:/root/.ssh:rwx                       #Enable ssh local keys to work inside of container to root
-      - ~/.ssh:/home/harpia/.ssh:rwx                #Enable ssh local keys to work inside of container to harpia user
+      - ~/.ssh:/root/.ssh:r                         #Enable ssh local keys to work inside of container to root
+      - ~/.ssh:/home/harpia/.ssh:r                  #Enable ssh local keys to work inside of container to harpia user
       - /etc/localtime:/etc/localtime:r             #Sets timezone 
       - /tmp/.X11-unix:/tmp/.X11-unix:rx            #Allows gui apps to run (Gazebo)
     network_mode: host                              #Share networks interface
