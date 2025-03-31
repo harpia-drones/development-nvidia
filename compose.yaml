@@ -2,7 +2,8 @@ services:
   harpia:
     container_name: harpia
     build:    
-      context: .                                    #Dockerfile location
+      context: ${HOME}                              #Dockerfile location
+      dockerfile: ${DOCKERFILE_PATH}                # Opcional (se não estiver no contexto)
     privileged: True                                #Allows acess to host hardware 
     environment:
       - DISPLAY=:0                                  #Link the host display to container display
@@ -14,8 +15,6 @@ services:
       - PATH=$PATH:/root/.local/bin:/usr/local/bin
     volumes:  
       - ./harpia_ws/src:/root/harpia_ws/src:rwx     #Links host and container files
-      - ~/.ssh:/root/.ssh:r                         #Enable ssh local keys to work inside of container to root
-      - ~/.ssh:/home/harpia/.ssh:r                  #Enable ssh local keys to work inside of container to harpia user
       - /etc/localtime:/etc/localtime:r             #Sets timezone 
       - /tmp/.X11-unix:/tmp/.X11-unix:rx            #Allows gui apps to run (Gazebo)
     network_mode: host                              #Share networks interface

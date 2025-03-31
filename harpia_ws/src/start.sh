@@ -12,6 +12,12 @@ DEP_FLAG_FILE="$DEPEND_FOLDER_PATH/package_creation/templates/minimum_node.py"
 
 if [ ! -f "$DEP_FLAG_FILE" ]; then
 
+    echo ""
+    echo "=================================================================="
+    echo "  Starting harpia's team development environment configuration..."
+    echo "=================================================================="
+    echo ""
+
     # Tmux configuration
     touch /root/.tmux.conf && \
     echo 'set -g mouse on' >> /root/.tmux.conf && \
@@ -25,6 +31,11 @@ if [ ! -f "$DEP_FLAG_FILE" ]; then
     apt-get update && \
     apt-get install -y ros-jazzy-joint-state-publisher-gui
 
+    # Create an alias to source the terminal
+    echo " " >> /root/.bashrc
+    echo "# Alias to source the terminal" >> /root/.bashrc
+    echo "alias bashrc='source /root/.bashrc'" >> /root/.bashrc
+
     # Create an alias to build ros2 workspace
     echo " " >> /root/.bashrc
     echo "# Alias to build ros2 workspace" >> /root/.bashrc
@@ -36,6 +47,14 @@ if [ ! -f "$DEP_FLAG_FILE" ]; then
     # Clone the entrypoint.sh
     curl -L "https://raw.githubusercontent.com/harpia-drones/config/refs/heads/main/entrypoint.sh" -o /root/config/entrypoint.sh && \
     chmod +x /root/config/entrypoint.sh
+
+    # Clone the eletroquad_world.sh
+    curl -L "https://raw.githubusercontent.com/harpia-drones/config/refs/heads/main/eletroquad_world.sh" -o /root/config/eletroquad_world.sh && \
+    chmod +x /root/config/eletroquad_world.sh
+
+    # Clone the eletroquad_model.sh
+    curl -L "https://raw.githubusercontent.com/harpia-drones/config/refs/heads/main/eletroquad_model.sh" -o /root/config/eletroquad_model.sh && \
+    chmod +x /root/config/eletroquad_model.sh
 
     # Create an alias to setup
     echo " " >> /root/.bashrc
@@ -50,8 +69,20 @@ if [ ! -f "$DEP_FLAG_FILE" ]; then
 
     if [ $? -eq 0 ]; then
         echo ""
+        echo "=================================================================="
+        echo "  Inital configuration done..."
+        echo "=================================================================="
+        echo ""
+        echo ">> now run \"setup\" to install the dependencies"
+        echo ""
+
+        # Exit the script returing a success code
+        exit 0
+    else
+        echo ""
         echo "Error when cloning make dependencies folder."
         echo ">> Configuration aborted."
+        echo ""
 
         # Exit the script returing a failure code
         exit 1
@@ -59,4 +90,5 @@ if [ ! -f "$DEP_FLAG_FILE" ]; then
 else
     echo " "
     echo ">> Requirement satisfied: Make dependencies."
+    echo ""
 fi
