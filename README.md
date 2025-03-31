@@ -6,10 +6,10 @@ Bem-vindo ao repositório de desenvolvimento da **Equipe Harpia**.
 
 ### 1. Clonar o repositório
 
-    ```bash
-    git clone git@github.com:harpia-drones/development.git
-    cd development
-    ```
+```bash
+git clone git@github.com:harpia-drones/development.git
+cd development
+```
 
 ### 2. Preparação para contruir o container
 
