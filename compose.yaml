@@ -1,12 +1,19 @@
 services:
   harpia:
+    deploy:                                         # Enable GPU access
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
     container_name: harpia
     build:    
-      context: ${HOME}                              #Dockerfile location
+      context: ${HOME}                              # Dockerfile location
       dockerfile: ${DOCKERFILE_PATH}                # Opcional (se não estiver no contexto)
-    privileged: True                                #Allows acess to host hardware 
+    privileged: True                                # Allows acess to host hardware 
     environment:
-      - DISPLAY=:0                                  #Link the host display to container display
+      - DISPLAY=:0                                  # Link the host display to container display
       - LANG=C.UTF-8 
       - LC_ALL=C.UTF-8 
       - ROS_DISTRO=jazzy
@@ -14,8 +21,8 @@ services:
       - NO_AT_BRIDGE=1 
       - PATH=$PATH:/root/.local/bin:/usr/local/bin
     volumes:  
-      - ./harpia_ws/src:/root/harpia_ws/src:rwx     #Links host and container files
-      - /etc/localtime:/etc/localtime:r             #Sets timezone 
-      - /tmp/.X11-unix:/tmp/.X11-unix:rx            #Allows gui apps to run (Gazebo)
-    network_mode: host                              #Share networks interface
-    tty: True                                       #Keeps container running
+      - ./harpia_ws/src:/root/harpia_ws/src:rwx     # Links host and container files
+      - /etc/localtime:/etc/localtime:r             # Sets timezone 
+      - /tmp/.X11-unix:/tmp/.X11-unix:rx            # Allows gui apps to run (Gazebo)
+    network_mode: host                              # Share networks interface
+    tty: True                                       # Keeps container running
