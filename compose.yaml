@@ -1,12 +1,5 @@
 services:
   harpia:
-    deploy:                                         # Enable GPU access
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
     container_name: harpia
     build:    
       context: ${HOME}                              # Dockerfile location
