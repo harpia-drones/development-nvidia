@@ -110,7 +110,7 @@ Ao acessar o terminal bash do container, inicie uma nova seção do tmux, execut
 
 Se você estiver usando o Gazebo com uma GPU NVIDIA e notar desempenho lento, é possível habilitar a aceleração por GPU manualmente:
 
-1. No seu arquivo `docker-compose.yml`, adicione o bloco abaixo **embaixo de `harpia:`**, no mesmo nível de indentação que `build` e `container_name`:
+1. No seu arquivo `compose.yaml`, adicione o bloco abaixo **embaixo de `harpia:`**, no mesmo nível de indentação que `build` e `container_name`:
 
     ```yaml
     deploy:                                         # Enable GPU access
