@@ -125,7 +125,7 @@ Se você estiver usando o Gazebo com uma GPU NVIDIA e notar desempenho lento, é
 2. Para evitar que essa configuração local seja enviada para o repositório, adicione o arquivo ao `.gitignore`:
 
     ```bash
-    echo "docker-compose.yml" >> .gitignore
+    echo "compose.yaml" >> .gitignore
     ```
 
 
