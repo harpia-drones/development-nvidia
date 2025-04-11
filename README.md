@@ -78,7 +78,7 @@ Ao final a instalação do QGroundControl será concluida, e o ambiente está pr
 
 ```bash
 cb
-ros2 launch offboard_control_bringup simulation.display.py
+ros2 launch offboard_control_bringup simulation.launch.py
 ```
 
 Esse comando iniciará o MicroXRCE, PX4 SITL + Gazebo + ros_gz_bridge, duas janelas de visualizaçao para câmeras e o QGroundControl em uma sessão do tmux chamada ```simulation```. Anexe à essa sessão:
