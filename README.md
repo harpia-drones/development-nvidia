@@ -9,7 +9,6 @@ Bem-vindo ao repositório de desenvolvimento da **Equipe Harpia**.
 ```bash
 git clone git@github.com:harpia-drones/development-nvidia.git
 mv development-nvidia development
-cd development
 ```
 
 ### 2. Preparação para contruir o container
