@@ -74,18 +74,24 @@ Acesse o container novamente e rode setup novamente. Após a conclusão dessa fa
 setup
 ```
 
-Ao final a instalação do QGroundControl será concluida, e o ambiente está pronto para ser usado. Para verificar a instalação, construia o workspace do ros2 e rode a launch de display dos programas usados na simulação:
+Ao final a instalação do QGroundControl será concluida, e o ambiente está pronto para ser usado. 
+
+Para verificar a instalação, construia o workspace do ros2 e compile o gazebo pela primeira vez.
 
 ```bash
 cb
-ros2 launch offboard_control_bringup simulation.launch.py
+PX4_GZ_WORLD=eletroquad make px4_sitl gz_x500_mono_cam
 ```
 
-Esse comando iniciará o MicroXRCE, PX4 SITL + Gazebo + ros_gz_bridge, duas janelas de visualizaçao para câmeras e o QGroundControl em uma sessão do tmux chamada ```simulation```. Anexe à essa sessão:
+A primeira compilação do gazebo é um pouco demorada. Uma vez que os arquivos foram compilados, as proximas vezes que o gazebo for aberto será mais rápido.
+
+Feche o gazebo dando CRTL + c no terminal em que ele está rodando. Uma vez fechado, inicie a simulação completa (todos os softwares de simulação serão abertos).
 
 ```bash
-tmux attach-session -t simulation
+ros2 launch offboard_control_bringup simulation.launch.py && tmux attach-session -t simulation
 ```
+
+Esse comando iniciará o MicroXRCE, PX4 SITL + Gazebo + ros_gz_bridge, duas janelas de visualizaçao para câmeras e o QGroundControl em uma sessão do tmux chamada ```simulation``` e anexará à essa sessão:
 
 Utilidades:
 
@@ -94,7 +100,7 @@ Utilidades:
 Ao acessar o terminal bash do container, inicie uma nova seção do tmux, executando:
 
 ```bash
-    tmux
+tmux
 ```
  
 > Comandos tmux:
