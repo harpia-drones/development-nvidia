@@ -2,20 +2,39 @@ services:
   harpia:
     container_name: harpia
     build:    
-      context: ${HOME}                              # Dockerfile location
-      dockerfile: ${DOCKERFILE_PATH}                # Opcional (se não estiver no contexto)
-    privileged: True                                # Allows acess to host hardware 
+      context: ${HOME}                                   
+      dockerfile: ${DOCKERFILE_PATH}                     
+    privileged: True  
+    runtime: nvidia                                       # Use GPU
     environment:
-      - DISPLAY=:0                                  # Link the host display to container display
-      - LANG=C.UTF-8 
-      - LC_ALL=C.UTF-8 
+      # System enrironment variables
+      - DISPLAY=${DISPLAY}                                # Link the host display to container display
+      - DEBIAN_FRONTEND=noninteractive                    # Sets non-interactive mode
+      - NO_AT_BRIDGE=1                                    # Disables at-bridge
+      - PATH=$PATH:/root/.local/bin:/usr/local/bin        # Adds local bin to path
+      
+      # ROS2 required environment variables
+      - LANG=C.UTF-8                                      # Sets language to C.UTF-8
+      - LC_ALL=C.UTF-8                                    # Sets locale to C.UTF-8
       - ROS_DISTRO=jazzy
-      - DEBIAN_FRONTEND=noninteractive 
-      - NO_AT_BRIDGE=1 
-      - PATH=$PATH:/root/.local/bin:/usr/local/bin
+ 
+      # GPU environment variables
+      - NVIDIA_DRIVER_CAPABILITIES=all                    # Use all GPU capabilities
+      - NVIDIA_VISIBLE_DEVICES=all                        # Use all GPUs
+      - __NV_PRIME_RENDER_OFFLOAD=1                       # Use NVIDIA GPU for rendering
+      - __GLX_VENDOR_LIBRARY_NAME=nvidia                  # Use NVIDIA GLX library
+      - XDG_RUNTIME_DIR=/tmp/runtime-user                 # Sets runtime directory
+      - QT_X11_NO_MITSHM=1                                # Disables MIT-SHM
+
+      # Hardware acceleration for gazebo
+      - LIBGL_ALWAYS_SOFTWARE=0                           # Ables hardware aceleration
+      - GALLIUM_DRIVER=llvmpipe                           # Fallback if acceleration fails
     volumes:  
-      - ./harpia_ws/src:/root/harpia_ws/src:rwx     # Links host and container files
-      - /etc/localtime:/etc/localtime:r             # Sets timezone 
-      - /tmp/.X11-unix:/tmp/.X11-unix:rx            # Allows gui apps to run (Gazebo)
-    network_mode: host                              # Share networks interface
-    tty: True                                       # Keeps container running
+      - ./harpia_ws/src:/root/harpia_ws/src:rwx           # Links host and container files
+      - /etc/localtime:/etc/localtime:r                   # Sets timezone 
+      - /tmp/.X11-unix:/tmp/.X11-unix:rwx                 # Allows gui apps to run (Gazebo)
+      - /dev/dri:/dev/dri                                 # Enable GPU direct acess, by passing X11
+      - /tmp/runtime-user:/tmp/runtime-user
+    network_mode: host                                    # Share networks interface
+    tty: True                                             # Keeps container running
+
