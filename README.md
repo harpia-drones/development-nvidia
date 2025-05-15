@@ -7,7 +7,8 @@ Bem-vindo ao repositório de desenvolvimento da **Equipe Harpia**.
 ### 1. Clonar o repositório
 
 ```bash
-git clone git@github.com:harpia-drones/development.git
+git clone git@github.com:harpia-drones/development-nvidia.git
+mv development-nvidia development
 cd development
 ```
 
