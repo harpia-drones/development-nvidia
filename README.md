@@ -80,7 +80,7 @@ Para verificar a instalação, construia o workspace do ros2 e compile o gazebo 
 
 ```bash
 cb
-PX4_GZ_WORLD=eletroquad make px4_sitl gz_x500_mono_cam
+cd ~/PX4-Autopilot && PX4_GZ_WORLD=eletroquad make px4_sitl gz_x500_mono_cam
 ```
 
 A primeira compilação do gazebo é um pouco demorada. Uma vez que os arquivos foram compilados, as proximas vezes que o gazebo for aberto será mais rápido.
