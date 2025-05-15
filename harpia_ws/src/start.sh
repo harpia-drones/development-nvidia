@@ -31,10 +31,10 @@ if [ ! -f "$DEP_FLAG_FILE" ]; then
     apt-get update && \
     apt-get install -y ros-jazzy-joint-state-publisher-gui
 
-    # Create an alias to source the terminal
+    # Create an alias to setup
     echo " " >> /root/.bashrc
-    echo "# Alias to source the terminal" >> /root/.bashrc
-    echo "alias bashrc='source /root/.bashrc'" >> /root/.bashrc
+    echo "# Alias to setup the environment" >> /root/.bashrc
+    echo "alias setup='bash /root/config/entrypoint.sh'" >> /root/.bashrc
 
     # Create an alias to build ros2 workspace
     echo " " >> /root/.bashrc
@@ -56,13 +56,8 @@ if [ ! -f "$DEP_FLAG_FILE" ]; then
     curl -L "https://raw.githubusercontent.com/harpia-drones/config/refs/heads/main/eletroquad_model.sh" -o /root/config/eletroquad_model.sh && \
     chmod +x /root/config/eletroquad_model.sh
 
-    # Create an alias to setup
-    echo " " >> /root/.bashrc
-    echo "# Create an alias to setup" >> /root/.bashrc
-    echo "alias setup='bash /root/config/entrypoint.sh'" >> /root/.bashrc
-
     # Clone dependencies folder 
-    echo ">> Cloning make dependencies folder..."
+    echo ">> Cloning dependencies folder..."
     echo " "
     cd "/root" && \
     git clone git@github.com:harpia-drones/dependencies.git && \
@@ -73,7 +68,7 @@ if [ ! -f "$DEP_FLAG_FILE" ]; then
         echo "  Inital configuration done..."
         echo "=================================================================="
         echo ""
-        echo ">> now run \"setup\" to install the dependencies"
+        echo ">> now run \"bashrc\" and then run \"setup\" to install the dependencies"
         echo ""
 
         # Exit the script returing a success code
