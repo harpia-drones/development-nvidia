@@ -58,17 +58,17 @@ run_in_container "$INTERNAL_START_SCRIPT_COMMAND" "initial start" || exit 1
 # Fisrt setup
 run_in_container "$INTERNAL_SETUP_SCRIPT_COMMAND" "first setup" || exit 1
 
-# # Restart
-# docker restart "$CONTAINER_NAME" || exit 1
+# Restart
+docker restart "$CONTAINER_NAME" || exit 1
 
-# # Sencond setup
-# run_in_container "$INTERNAL_SETUP_SCRIPT_COMMAND" "second setup" || exit 1
+# Sencond setup
+run_in_container "$INTERNAL_SETUP_SCRIPT_COMMAND" "second setup" || exit 1
 
-# # Restart
-# docker restart "$CONTAINER_NAME" || exit 1
+# Restart
+docker restart "$CONTAINER_NAME" || exit 1
 
-# # Third setup
-# run_in_container "$INTERNAL_SETUP_SCRIPT_COMMAND" "third setup" || exit 1
+# Third setup
+run_in_container "$INTERNAL_SETUP_SCRIPT_COMMAND" "third setup" || exit 1
 
 echo "##########################################"
 echo "#                                        #"
