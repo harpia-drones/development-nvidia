@@ -4,88 +4,53 @@ Bem-vindo ao repositório de desenvolvimento da **Equipe Harpia**.
 
 ## Como usar este repositório
 
-### 1. Clonar o repositório
+### 1. Clonar e renomear o repositório
 
 ```bash
 git clone git@github.com:harpia-drones/development-nvidia.git
 mv development-nvidia development
 ```
 
-### 2. Preparação para contruir o container
-
-Acesse o diretório ```development``` que acabou de ser clonado.
+### 2. Acessar o diretório ```development``` que acabou de ser clonado.
 
 ```bash
 cd development
 ```
 
-e rode
+### 3. Executar o script harpia.sh
 
 ```bash
-echo "DOCKERFILE_PATH=$(pwd)/Dockerfile" >> .env
-echo "HOME=$(echo $HOME)" >> .env
+bash harpia.sh
 ```
 
-### 3. Construir e iniciar o container
+Esse script se encarregada de criar e configurar o container.
 
-Use o Docker Compose para construir e iniciar o ambiente.
+### 4. Acessar o container
 
-```bash
-docker compose up -d --build
-```
-
-### 3. Acessar o container
-
-Para acessar o terminal do container, utilize:
+Uma vez que o script ```harpia.sh``` terminou de rodar, execute o comando abaixo para acessar o container.
 
 ```bash
 docker exec -it harpia bash
 ```
 
-### 4. Configurações iniciais
+### 5. Compilar os pacotes ROS 2 dentro do container
 
-Ao entrar no container o diretório atual será /root/harpia_ws. Execute o script de inicialização que está dentro da pasta src/ com o comando:
-
-```bash
-start
-```
-
-Esse script faz as configurações iniciais. Valide as configurações com
-
-```bash
-bashrc
-```
-
-Instale a PX4 rodando
-
-```bash
-setup
-```
-
-Após a esse passo, será solicitado que o container seja reiniciado. Para reiniciar o container, saia do container com ctrl + D ou rodando "exit" no terminal. Fora do container execute:
-
-```bash
-docker restart harpia
-```
-
-Acesse o container novamente e rode setup novamente. Após a conclusão dessa fase, a PX4-Autopilot e o Micro-XRCE-DDS estarão devidamente instalados. O próximo passo é instalar o QGroundControl:
-
-```bash
-setup
-```
-
-Ao final a instalação do QGroundControl será concluida, e o ambiente está pronto para ser usado. 
-
-Para verificar a instalação, construia o workspace do ros2 e compile o gazebo pela primeira vez.
+Ao abrir o container o diretório atual será ```~/harpia_ws```. O comando ```cb``` (alias para "colcon build") SEMPRE deve ser rodado dentro desse diretório.
 
 ```bash
 cb
-cd ~/PX4-Autopilot && PX4_GZ_WORLD=eletroquad make px4_sitl gz_x500_mono_cam
+```
+
+### 6. Compilar o gazebo pela primeira vez
+
+```bash
+cd ~/PX4-Autopilot
+make px4_sitl gz_x500_mono_cam
 ```
 
 A primeira compilação do gazebo é um pouco demorada. Uma vez que os arquivos foram compilados, as proximas vezes que o gazebo for aberto será mais rápido.
 
-Feche o gazebo dando CRTL + c no terminal em que ele está rodando. Uma vez fechado, inicie a simulação completa (todos os softwares de simulação serão abertos).
+Feche o gazebo dando `CRTL + c` no terminal em que ele está rodando. Uma vez fechado, inicie a simulação completa (todos os softwares de simulação serão abertos).
 
 ```bash
 ros2 launch offboard_control_bringup simulation.launch.py && tmux attach-session -t simulation

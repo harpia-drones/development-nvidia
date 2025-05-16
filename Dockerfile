@@ -35,31 +35,6 @@ RUN \
     apt-get install -y ros-${ROS_DISTRO}-ros-gz; \
     \
 ############################################## 
-#                 Tmux Setup 
-##############################################
-    \
-    # Create the tmux config file
-    touch /root/.tmux.conf && \
-    \
-    # Enable mouse support
-    echo 'set -g mouse on' >> /root/.tmux.conf && \
-    \
-    # Move to the pane on the left (bind Ctrl+Left to select the left pane)
-    echo 'bind -n C-Left select-pane -L' >> /root/.tmux.conf && \
-    \
-    # Move to the pane on the right (bind Ctrl+Right to select the right pane)
-    echo 'bind -n C-Right select-pane -R' >> /root/.tmux.conf && \
-    \
-    # Move to the pane above (bind Ctrl+Up to select the upper pane)
-    echo 'bind -n C-Up select-pane -U' >> /root/.tmux.conf && \
-    \
-    # Move to the pane below (bind Ctrl+Down to select the bottom pane)
-    echo 'bind -n C-Down select-pane -D' >> /root/.tmux.conf && \
-    \
-    # Avoid conflicts with modifier selection keys (set vi mode)
-    echo 'setw -g mode-keys vi' >> /root/.tmux.conf && \
-    \
-############################################## 
 #       Terminal personalization Setup 
 ##############################################
     \
