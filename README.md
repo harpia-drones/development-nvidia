@@ -75,31 +75,6 @@ tmux
 - **Fechar um terminal**: exit
 - **Navegar entre os terminais de uma mesma sessão**: crtl + seta
 
-## Solução de Problemas
-
-### Desempenho lento no Gazebo com GPU NVIDIA (WSL2 ou nativo)
-
-Se você estiver usando o Gazebo com uma GPU NVIDIA e notar desempenho lento, é possível habilitar a aceleração por GPU manualmente:
-
-1. No seu arquivo `compose.yaml`, adicione o bloco abaixo **embaixo de `harpia:`**, no mesmo nível de indentação que `build` e `container_name`:
-
-    ```yaml
-    deploy:                                         # Enable GPU access
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
-    ```
-
-2. Para evitar que essa configuração local seja enviada para o repositório, adicione o arquivo ao `.gitignore`:
-
-    ```bash
-    echo "compose.yaml" >> .gitignore
-    ```
-
-
 ## Estrutura do diretório
 
 ```
