@@ -56,24 +56,7 @@ Feche o gazebo dando `CRTL + c` no terminal em que ele está rodando. Uma vez fe
 ros2 launch offboard_control_bringup simulation.launch.py && tmux attach-session -t simulation
 ```
 
-Esse comando iniciará o MicroXRCE, PX4 SITL + Gazebo + ros_gz_bridge, duas janelas de visualizaçao para câmeras e o QGroundControl em uma sessão do tmux chamada ```simulation``` e anexará à essa sessão:
-
-Utilidades:
-
-## Usando multiplos terminais
-
-Ao acessar o terminal bash do container, inicie uma nova seção do tmux, executando:
-
-```bash
-tmux
-```
- 
-> Comandos tmux:
-
-- **Dividir horizontalmente**: ctrl + b, %
-- **Dividir verticalmente**: ctrl + b, "
-- **Fechar um terminal**: exit
-- **Navegar entre os terminais de uma mesma sessão**: crtl + seta
+Esse comando iniciará o MicroXRCE, PX4 SITL + Gazebo + ros_gz_bridge, duas janelas de visualizaçao para câmeras e o QGroundControl em uma sessão do tmux chamada ```simulation``` e anexará à essa sessão.
 
 ## Estrutura do diretório
 
@@ -81,15 +64,19 @@ tmux
     development/
     ├── harpia_ws/
     │   └── src/ 
-    │       └── Makefile
+    │       ├── Makefile
     │       └── start.sh
+    ├── .dockerignore
     ├── compose.yaml
-    └── Dockerfile
+    ├── Dockerfile
+    └── harpia.sh
 ```
 
 ## Descrição dos arquivos
 
+- **.gitignore**: Arquivo de suporte à contrução do container.
 - **compose.yaml**: Configuração do Docker Compose para o container.
 - **Dockerfile**: Especificações para construir a imagem do ROS2 e Gazebo.
 - **Makefile**: Script de automatização de criação de pacotes.
 - **start.sh**: Script de configuração do ambiente.
+- **harpia.sh**: Script de automatização de criação do container.
