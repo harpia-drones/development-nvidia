@@ -24,8 +24,8 @@ RUN \
     # Update and upgrade the system
     apt-get update && apt-get upgrade -y && \
     \
-    # Install command line tools (tmux, unzip, gedit, vim)
-    apt-get install -y tmux unzip gedit vim && \
+    # Install command line tools (tmux, unzip, gedit, vim, wget)
+    apt-get install -y tmux unzip gedit vim wget&& \
     \
 ############################################## 
 #            Gazebo Harmonic Setup 
