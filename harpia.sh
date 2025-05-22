@@ -7,10 +7,6 @@ CONTAINER_NAME="harpia"
 INTERNAL_START_SCRIPT_COMMAND="bash /root/harpia_ws/src/start.sh && source /root/.bashrc"
 INTERNAL_SETUP_SCRIPT_COMMAND="bash /root/config/entrypoint.sh"
 
-# Create the .env file
-echo "DOCKERFILE_PATH=$(pwd)/Dockerfile" > .env
-echo "HOME=$HOME" >> .env
-
 # Create the container
 echo ""
 echo "------------------------------------------------------------------"
@@ -23,6 +19,18 @@ if docker compose up -d; then
     echo "Container created successfully"
 else
     echo "Failed to create container"
+    exit 1
+fi
+
+# Clone start.sh script used in "start" command
+cd harpia_ws/src
+echo "" 
+if git clone git@github.com:harpia-drones/start.git; then
+    cp start/start.sh .
+    chmod a+x start.sh
+    rm -rf start/
+    cd ../..
+else
     exit 1
 fi
 
@@ -69,6 +77,10 @@ docker restart "$CONTAINER_NAME" || exit 1
 
 # Third setup
 run_in_container "$INTERNAL_SETUP_SCRIPT_COMMAND" "third setup" || exit 1
+
+cd harpia_ws/src
+rm -rf start.sh
+cd ../..
 
 echo "##########################################"
 echo "#                                        #"
