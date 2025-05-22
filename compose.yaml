@@ -1,9 +1,7 @@
 services:
   harpia:
     container_name: harpia
-    build:    
-      context: ${HOME}                                   
-      dockerfile: ${DOCKERFILE_PATH}                     
+    image: ufrjharpia/development:latest                   
     privileged: True  
     runtime: nvidia                                       # Use GPU
     environment:
