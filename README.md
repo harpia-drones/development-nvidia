@@ -61,14 +61,12 @@ Esse comando iniciará o MicroXRCE, PX4 SITL + Gazebo + ros_gz_bridge, duas jane
 ## Estrutura do diretório
 
 ```
-    development/
+    development-nvidia/
     ├── harpia_ws/
     │   └── src/ 
-    │       ├── Makefile
-    │       └── start.sh
+    │       └── Makefile
     ├── .dockerignore
     ├── compose.yaml
-    ├── Dockerfile
     └── harpia.sh
 ```
 
@@ -76,7 +74,5 @@ Esse comando iniciará o MicroXRCE, PX4 SITL + Gazebo + ros_gz_bridge, duas jane
 
 - **.gitignore**: Arquivo de suporte à contrução do container.
 - **compose.yaml**: Configuração do Docker Compose para o container.
-- **Dockerfile**: Especificações para construir a imagem do ROS2 e Gazebo.
 - **Makefile**: Script de automatização de criação de pacotes.
-- **start.sh**: Script de configuração do ambiente.
 - **harpia.sh**: Script de automatização de criação do container.
