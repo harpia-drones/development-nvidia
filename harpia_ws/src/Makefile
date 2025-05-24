@@ -14,6 +14,7 @@ create:
 # Verify if both 'name' and 'lang' were defined
 ifdef name
 ifdef lang
+	@echo "" 
 	@echo "===================================="
 	@echo "Package name: $(name)"
 	@echo "Language: $(lang)"
@@ -49,7 +50,6 @@ endif
 	@chmod -R a+rwx $(name)
 	@echo " "
 	@echo "Package created succesfully!"
-	@echo " "
 
 # If lang is not defined show an error message
 else
@@ -74,6 +74,7 @@ create-bringup:
 # verify is the name was defined
 ifdef name
 # if name is defined, then create the package
+	@echo "" 
 	@echo "===================================="
 	@echo "Package name: $(name)_bringup"
 	@echo "===================================="
@@ -89,15 +90,15 @@ ifdef name
 	@cd $(name)_bringup && mkdir launch config
 
 # copy and edit the CMakeList.txt file
-	@cp dependencies/bringup/CMakeLists.txt $(name)_bringup/CMakeLists.txt
+	@cp /root/dependencies/package_creation/bringup/CMakeLists.txt $(name)_bringup/CMakeLists.txt
 	@sed -i '2s/.*/project($(name)_bringup)/' $(name)_bringup/CMakeLists.txt
 
 # copy and edit the package.xml file
-	@cp dependencies/bringup/package.xml $(name)_bringup/package.xml
+	@cp /root/dependencies/package_creation/bringup/package.xml $(name)_bringup/package.xml
 	@sed -i '4s/.*/  <name>$(name)_bringup<\/name>/' $(name)_bringup/package.xml
 
 # copy launch file to launch folder
-	@cp dependencies/bringup/launch/my_robot.launch.py $(name)_bringup/launch/$(name).launch.py
+	@cp /root/dependencies/package_creation/bringup/launch/my_robot.launch.py $(name)_bringup/launch/$(name).launch.py
 
 # validate the changes
 	@echo "===================================="
@@ -105,14 +106,13 @@ ifdef name
 	@echo " "
 	@cd .. && colcon build --packages-select $(name)_bringup
 	@echo "===================================="
-	@echo " "
+	@echo ""
 	@echo "Sourcing the environment..."
 	@cd .. && source ~/.bashrc
 	@echo "Setting permissions..."
 	@chmod -R a+rwx $(name)_bringup/
-	@echo " "
+	@echo ""
 	@echo "Package created succesfully!"
-	@echo " " 
 
 # if name is not defined, show an error message
 else
@@ -128,6 +128,7 @@ create-interfaces:
 # verify is the name was defined
 ifdef name
 # if name is defined, then create the package
+	@echo ""
 	@echo "===================================="
 	@echo "Package name: $(name)_interfaces"
 	@echo "===================================="
@@ -143,11 +144,11 @@ ifdef name
 	@cd $(name)_interfaces && mkdir msg srv action
 
 # copy and edit the CMakeList.txt file
-	@cp dependencies/interfaces/CMakeLists.txt $(name)_interfaces/CMakeLists.txt
+	@cp /root/dependencies/package_creation/interfaces/CMakeLists.txt $(name)_interfaces/CMakeLists.txt
 	@sed -i '2s/.*/project($(name)_interfaces)/' $(name)_interfaces/CMakeLists.txt
 
 # copy and edit the package.xml file
-	@cp dependencies/interfaces/package.xml $(name)_interfaces/package.xml
+	@cp /root/dependencies/package_creation/interfaces/package.xml $(name)_interfaces/package.xml
 	@sed -i '4s/.*/  <name>$(name)_interfaces<\/name>/' $(name)_interfaces/package.xml
 
 # validate the changes
@@ -156,14 +157,13 @@ ifdef name
 	@echo " "
 	@cd .. && colcon build --packages-select $(name)_interfaces
 	@echo "===================================="
-	@echo " "
+	@echo ""
 	@echo "Sourcing the environment..."
 	@cd .. && source ~/.bashrc
 	@echo "Setting permissions..."
 	@chmod -R a+rwx $(name)_interfaces/
-	@echo " "
+	@echo ""
 	@echo "Package created succesfully!"
-	@echo " "
 
 # if name is not defined, show an error message
 else
@@ -178,6 +178,7 @@ create-description:
 # verify is the name was defined
 ifdef name
 # if name is defined, then create the package
+	@echo "" 
 	@echo "===================================="
 	@echo "Package name: $(name)_description"
 	@echo "===================================="
@@ -198,30 +199,29 @@ ifdef urdf_path
 endif 
 
 # copy and edit the CMakeList.txt file
-	@cp dependencies/description/CMakeLists.txt $(name)_description/CMakeLists.txt
+	@cp /root/dependencies/package_creation/description/CMakeLists.txt $(name)_description/CMakeLists.txt
 	@sed -i '2s/.*/project($(name)_description)/' $(name)_description/CMakeLists.txt
 
 # copy and edit the package.xml file
-	@cp dependencies/description/package.xml $(name)_description/package.xml
+	@cp /root/dependencies/package_creation/description/package.xml $(name)_description/package.xml
 	@sed -i '4s/.*/  <name>$(name)_description<\/name>/' $(name)_description/package.xml
 
 # copy launch file to launch folder
-	@cp dependencies/description/launch/display.launch.py $(name)_description/launch/display.launch.py
+	@cp /root/dependencies/package_creation/description/launch/display.launch.py $(name)_description/launch/display.launch.py
 
 # validate the changes
 	@echo "===================================="
 	@echo "Building the package..."
-	@echo " "
+	@echo ""
 	@cd .. && colcon build --packages-select $(name)_description
 	@echo "===================================="
-	@echo " "
+	@echo ""
 	@echo "Sourcing the environment..."
 	@cd .. && source ~/.bashrc
 	@echo "Setting permissions..."
 	@chmod -R a+rwx $(name)_description/
-	@echo " "
+	@echo ""
 	@echo "Package created succesfully!"
-	@echo " "
 
 # if name is not defined, show an error message
 else
