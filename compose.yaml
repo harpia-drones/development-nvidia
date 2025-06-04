@@ -1,7 +1,7 @@
 services:
   harpia:
     container_name: harpia
-    image: ufrjharpia/development:latest                   
+    image: ufrjharpia/development:members                 
     privileged: True  
     runtime: nvidia                                       # Use GPU
     environment:

@@ -4,11 +4,11 @@ Bem-vindo ao repositório de desenvolvimento da **Equipe Harpia**.
 
 ## Como usar este repositório
 
-### 1. Clonar e renomear o repositório
+### 1. Clonar o repositório
 
 ```bash
 git clone git@github.com:harpia-drones/development-nvidia.git
-mv development-nvidia development
+mv development-nvidia/ development/
 ```
 
 ### 2. Acessar o diretório ```development``` que acabou de ser clonado.
@@ -17,31 +17,34 @@ mv development-nvidia development
 cd development
 ```
 
-### 3. Executar o script harpia.sh
+### 3. Criar o container
 
 ```bash
-bash harpia.sh
+docker compose up -d
 ```
 
-Esse script se encarregada de criar e configurar o container.
-
 ### 4. Acessar o container
-
-Uma vez que o script ```harpia.sh``` terminou de rodar, execute o comando abaixo para acessar o container.
 
 ```bash
 docker exec -it harpia bash
 ```
 
-### 5. Compilar os pacotes ROS 2 dentro do container
-
-Ao abrir o container o diretório atual será ```~/harpia_ws```. O comando ```cb``` (alias para "colcon build") SEMPRE deve ser rodado dentro desse diretório.
+### 5. Clonar os pacotes base
 
 ```bash
-cb
+bash /root/config/clone-basic-packages.sh
+
 ```
 
-### 6. Compilar o gazebo pela primeira vez
+Esse script se clona os pacotes `offboard_control`, `offboard_control_bringup` e `px4_msgs`, que usamos como base para o desenvolvimento dos códigos.
+
+### 6. Validar as alterações no shell atual
+
+```bash
+bashrc
+```
+
+### 7. Validação dos softwares de simulação
 
 ```bash
 cd ~/PX4-Autopilot
@@ -56,23 +59,21 @@ Feche o gazebo dando `CRTL + c` no terminal em que ele está rodando. Uma vez fe
 ros2 launch offboard_control_bringup simulation.launch.py && tmux attach-session -t simulation
 ```
 
-Esse comando iniciará o MicroXRCE, PX4 SITL + Gazebo + ros_gz_bridge, duas janelas de visualizaçao para câmeras e o QGroundControl em uma sessão do tmux chamada ```simulation``` e anexará à essa sessão.
+Esse comando iniciará o `MicroXRCE`, `PX4 SITL` + `Gazebo` + `ros_gz_bridge`, duas janelas de visualizaçao para câmeras e o QGroundControl em uma sessão do tmux chamada ```simulation``` e anexará à essa sessão.
 
 ## Estrutura do diretório
 
 ```
-    development-nvidia/
+    development/
     ├── harpia_ws/
     │   └── src/ 
     │       └── Makefile
     ├── .dockerignore
-    ├── compose.yaml
-    └── harpia.sh
+    └── compose.yaml
 ```
 
 ## Descrição dos arquivos
 
-- **.gitignore**: Arquivo de suporte à contrução do container.
+- **.dockerignore**: Arquivo de suporte à contrução do container.
 - **compose.yaml**: Configuração do Docker Compose para o container.
 - **Makefile**: Script de automatização de criação de pacotes.
-- **harpia.sh**: Script de automatização de criação do container.
