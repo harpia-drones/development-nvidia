@@ -36,7 +36,7 @@ bash /root/config/clone-basic-packages.sh
 
 ```
 
-Esse script se clona os pacotes `offboard_control`, `offboard_control_bringup` e `px4_msgs`, que usamos como base para o desenvolvimento dos códigos.
+Esse script clona os pacotes `offboard_control`, `offboard_control_bringup` e `px4_msgs`, que usamos como base para o desenvolvimento dos códigos, e roda `colcon build`.
 
 ### 6. Validar as alterações no shell atual
 
