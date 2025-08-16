@@ -2,7 +2,7 @@
 
 Bem-vindo ao repositório de desenvolvimento da **Equipe Harpia**.
 
-VERSÃO:  
+VERSÃO: ``Com`` suporte à aceleração por hardware usando GPU Nvidia.
 
 ## Como usar este repositório
 
