@@ -2,6 +2,8 @@
 
 Bem-vindo ao repositório de desenvolvimento da **Equipe Harpia**.
 
+VERSÃO:  
+
 ## Como usar este repositório
 
 ### 1. Clonar o repositório
@@ -32,34 +34,54 @@ docker exec -it harpia bash
 ### 5. Clonar os pacotes base
 
 ```bash
-bash /root/config/clone-basic-packages.sh
-
+clone-base-packages
 ```
 
-Esse script clona os pacotes `offboard_control`, `offboard_control_bringup` e `px4_msgs`, que usamos como base para o desenvolvimento dos códigos, e roda `colcon build`.
+Esse script clona os pacotes `movement_controller`, `simulation_bringup` e `px4_msgs`, que usamos como base para o desenvolvimento dos códigos.
 
-### 6. Validar as alterações no shell atual
+### 6. Sincronizar as mensagem da PX4-Autopilot com as do pacote px4_msgs
 
 ```bash
-bashrc
+sync-px4-msgs
 ```
 
-### 7. Validação dos softwares de simulação
+### 7. Compilar os pacotes
 
 ```bash
-cd ~/PX4-Autopilot
-make px4_sitl gz_x500_mono_cam
+cb
 ```
 
-A primeira compilação do gazebo é um pouco demorada. Uma vez que os arquivos foram compilados, as proximas vezes que o gazebo for aberto será mais rápido.
+## Utilidades
 
-Feche o gazebo dando `CRTL + c` no terminal em que ele está rodando. Uma vez fechado, inicie a simulação completa (todos os softwares de simulação serão abertos).
+### 1. Iniciar softwares de simulação
 
 ```bash
-ros2 launch offboard_control_bringup simulation.launch.py && tmux attach-session -t simulation
+sim                 # ros2 launch simulation_bringup simulation.launch.py && tmux attach-session -t simulation
 ```
 
-Esse comando iniciará o `MicroXRCE`, `PX4 SITL` + `Gazebo` + `ros_gz_bridge`, duas janelas de visualizaçao para câmeras e o QGroundControl em uma sessão do tmux chamada ```simulation``` e anexará à essa sessão.
+Esse comando iniciará o `MicroXRCE`, `PX4 SITL` + `Gazebo` + `ros_gz_bridge`, uma janela de visualizaçao para câmeras e o QGroundControl em uma sessão do tmux chamada ```simulation``` e anexará à essa sessão.
+
+### 2. Colcon build
+
+```bash
+cb                   # colcon build padrão
+cb <pkg1> <pkg2>     # colcon build --packages-select <pkg1> <pkg2>
+cbsi                 # colcon build --symlink-install
+cbsi <pkg1> <pkg2>   # colcon build --packages-select <pkg1> <pkg2> --symlink-install
+cbpi <pkg1> <pkg2>   # colcon build --packages-ignore <pkg1> <pkg2>
+```
+
+### 3. Aplicar atualizações no .bashrc
+
+```bash
+bashrc               # source .bashrc
+```
+
+### 4. Abrir um visualizador de imagem do rqt
+
+```bash
+view                 # ros2 run rqt_image_view rqt_image_view
+```
 
 ## Estrutura do diretório
 
@@ -68,12 +90,11 @@ Esse comando iniciará o `MicroXRCE`, `PX4 SITL` + `Gazebo` + `ros_gz_bridge`, d
     ├── harpia_ws/
     │   └── src/ 
     │       └── Makefile
-    ├── .dockerignore
-    └── compose.yaml
+    ├── compose.yaml
+    └── README.md
 ```
 
 ## Descrição dos arquivos
 
-- **.dockerignore**: Arquivo de suporte à contrução do container.
-- **compose.yaml**: Configuração do Docker Compose para o container.
+- **compose.yaml**: Configuração do Docker Compose para criação do container.
 - **Makefile**: Script de automatização de criação de pacotes.
