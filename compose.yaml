@@ -45,4 +45,7 @@ services:
       # GPU
       - /dev/dri:/dev/dri                                 # Enable GPU direct acess, by passing X11
       - /tmp/runtime-user:/tmp/runtime-user
+      
+      # Add local ssh keys
+      - ~/.ssh:/root/.ssh:ro
 
