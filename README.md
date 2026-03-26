@@ -19,19 +19,26 @@ mv development-nvidia/ development/
 cd development
 ```
 
-### 3. Criar o container
+### 3. Instalar as dependências
+
+```
+sudo chmod +x ./install-dependencies.sh
+sudo ./install-dependencies.sh
+```
+
+### 4. Criar o container
 
 ```bash
 docker compose up -d
 ```
 
-### 4. Acessar o container
+### 5. Acessar o container
 
 ```bash
 docker exec -it harpia bash
 ```
 
-### 5. Clonar os pacotes base
+### 6. Clonar os pacotes base
 
 ```bash
 clone-base-packages
@@ -39,13 +46,13 @@ clone-base-packages
 
 Esse script clona os pacotes `movement_controller`, `simulation_bringup` e `px4_msgs`, que usamos como base para o desenvolvimento dos códigos.
 
-### 6. Sincronizar as mensagem da PX4-Autopilot com as do pacote px4_msgs
+### 7. Sincronizar as mensagem da PX4-Autopilot com as do pacote px4_msgs
 
 ```bash
 sync-px4-msgs
 ```
 
-### 7. Compilar os pacotes
+### 8. Compilar os pacotes
 
 ```bash
 cb
