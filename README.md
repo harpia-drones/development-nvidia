@@ -2,7 +2,9 @@
 
 Bem-vindo ao repositório de desenvolvimento da **Equipe Harpia**.
 
-VERSÃO: ``Com`` suporte à aceleração por hardware usando GPU Nvidia.
+VERSÃO: 
+- ``Com`` suporte à aceleração por hardware usando GPU Nvidia.
+- Imagem: `ufrjharpia/development:humble-px4`
 
 ## Como usar este repositório
 
@@ -19,89 +21,51 @@ mv development-nvidia/ development/
 cd development
 ```
 
-### 3. Instalar as dependências
+### 3. Preparar os volumes do container
 
+Antes de criar o container, é necessário criar os diretórios que serão montados como volumes:
+
+```bash
+mkdir -p harpia_ws/src
+mkdir -p .git-identity && touch .git-identity/.gitconfig
 ```
+
+> **harpia_ws/src** — workspace ROS2 onde seus pacotes serão desenvolvidos. Esse diretório é compartilhado entre o host e o container.
+>
+> **.git-identity/.gitconfig** — arquivo de configuração do Git dentro do container. Permite que sua identidade Git (nome e email) persista entre sessões.
+
+### 4. Instalar as dependências
+
+```bash
 sudo chmod +x ./install-dependencies.sh
 sudo ./install-dependencies.sh
 ```
 
-### 4. Criar o container
+### 5. Criar o container
 
 ```bash
 docker compose up -d
 ```
 
-### 5. Acessar o container
+### 6. Acessar o container
 
 ```bash
 docker exec -it harpia bash
-```
-
-### 6. Clonar os pacotes base
-
-```bash
-clone-base-packages
-```
-
-Esse script clona os pacotes `movement_controller`, `simulation_bringup` e `px4_msgs`, que usamos como base para o desenvolvimento dos códigos.
-
-### 7. Sincronizar as mensagem da PX4-Autopilot com as do pacote px4_msgs
-
-```bash
-sync-px4-msgs
-```
-
-### 8. Compilar os pacotes
-
-```bash
-cb
-```
-
-## Utilidades
-
-### 1. Iniciar softwares de simulação
-
-```bash
-sim                 # ros2 launch simulation_bringup simulation.launch.py && tmux attach-session -t simulation
-```
-
-Esse comando iniciará o `MicroXRCE`, `PX4 SITL` + `Gazebo` + `ros_gz_bridge`, uma janela de visualizaçao para câmeras e o QGroundControl em uma sessão do tmux chamada ```simulation``` e anexará à essa sessão.
-
-### 2. Colcon build
-
-```bash
-cb                   # colcon build padrão
-cb <pkg1> <pkg2>     # colcon build --packages-select <pkg1> <pkg2>
-cbsi                 # colcon build --symlink-install
-cbsi <pkg1> <pkg2>   # colcon build --packages-select <pkg1> <pkg2> --symlink-install
-cbpi <pkg1> <pkg2>   # colcon build --packages-ignore <pkg1> <pkg2>
-```
-
-### 3. Aplicar atualizações no .bashrc
-
-```bash
-bashrc               # source .bashrc
-```
-
-### 4. Abrir um visualizador de imagem do rqt
-
-```bash
-view                 # ros2 run rqt_image_view rqt_image_view
 ```
 
 ## Estrutura do diretório
 
 ```
     development/
-    ├── harpia_ws/
-    │   └── src/ 
-    │       └── Makefile
-    ├── compose.yaml
+    ├── harpia_ws/              
+    │   └── src/                # volume
+    ├── .git-identity/          # volume
+    │   └── .gitconfig
+    ├── compose.yaml            # arquivo de configuração
     └── README.md
 ```
 
 ## Descrição dos arquivos
 
 - **compose.yaml**: Configuração do Docker Compose para criação do container.
-- **Makefile**: Script de automatização de criação de pacotes.
+- **.git-identity/.gitconfig**: Arquivo de configuração do Git, persistido localmente entre sessões do container.

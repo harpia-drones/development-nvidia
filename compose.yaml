@@ -1,7 +1,7 @@
 services:
   harpia:
     container_name: harpia
-    image: ufrjharpia/development:cbr25-amd64        
+    image: ufrjharpia/development:humble-px4       
     
     privileged: true  
     runtime: nvidia                                       # Use GPU
@@ -18,7 +18,7 @@ services:
       # ROS2 required environment variables
       - LANG=C.UTF-8                                      # Sets language to C.UTF-8
       - LC_ALL=C.UTF-8                                    # Sets locale to C.UTF-8
-      - ROS_DISTRO=jazzy
+      - ROS_DISTRO=humble
  
       # GPU environment variables
       - NVIDIA_DRIVER_CAPABILITIES=all                    # Use all GPU capabilities
@@ -46,6 +46,6 @@ services:
       - /dev/dri:/dev/dri                                 # Enable GPU direct acess, by passing X11
       - /tmp/runtime-user:/tmp/runtime-user
       
-      # Add local ssh keys
-      - ~/.ssh:/root/.ssh:ro
+      # Git identity 
+      - ./.git-identity:/root/.git-identity                # Save git identity locally
 
