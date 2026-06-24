@@ -3,7 +3,7 @@
 Bem-vindo ao repositório de desenvolvimento da **Equipe Harpia**.
 
 VERSÃO: 
-- ``Com`` suporte à aceleração por hardware usando GPU Nvidia.
+- ``COM`` suporte à aceleração por hardware usando GPU Nvidia.
 - Imagem: `ufrjharpia/development:humble-px4`
 
 ## Como usar este repositório
